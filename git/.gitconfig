@@ -1,0 +1,26 @@
+[core]
+        excludesFile = ~/.gitignore
+[user]
+        name = Jane Doe
+        email = jane@example.com
+# "If I have made my own commits to main, please force me to confront this problem NOW" - Jenny Bryan
+# ref: https://happygitwithr.com/upstream-changes.html?#sync-option-1-pull-changes-from-upstream-then-push-to-origin
+[pull]
+        ff = only
+[init]
+        defaultBranch = main
+
+# The idea here is to store a GH PAT as an environment-variable named GH_TOKEN.
+#  - create token using this link (following usethis): 
+#      https://github.com/settings/tokens/new?scopes=repo,user,gist,workflow,read:org,read:packages&description=DESCRIBE%20THE%20TOKEN%27S%20USE%20CASE
+#  - set envvar GH_TOKEN in ~/.zshenv-secret: encrypt to commit, decrypt to use
+#  - gh uses this envvar to authenticate to github.com
+#  - git uses gh to get its credentials
+#  - blank hepler-values are intentional: https://github.com/cli/cli/issues/3796#issuecomment-1065150465
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential         
